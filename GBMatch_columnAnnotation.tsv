@@ -1,0 +1,397 @@
+columnName	Explanation	
+patID	Patient ID (together with “surgery” links to histology and MRI images)	
+surgery	Clinical annotation: Surgery number of the tumor sample (together with “patID” links to histology and MRI images)	
+EGA_id	Sample ID assigned by EGA (links to the archived raw data)	
+GEO_id	Sample ID assigned by GEO (links to the archived processed data)	
+id	Sample ID (links to the RRBS data provided as R objects)	
+cellType	Sample cell type	
+phenotype	Sample phenotype	
+tissue	Sample tissue	
+material	Sample material	
+category	"Sample category (""GBMatch"": Progression cohort, ""Gbmatch_val"": Validation cohort, ""GLASS"" and  ""Gbmatch_valF"": Frozen sample controls, ”control"": White matter control, ""Gbmatch_add"": IDH mut control, ""Gbmatch_rcl"": RCL samples, ""multiselector"": Multiple samples from one tumor    )"	
+batch	Processing batch 	
+cohort	Progression: samples of the progression cohort + control samples, Validation: samples of the validation cohort + control samples
+plate position	RRBS library preparation plate position	
+inputDNA	RRBS library preparation input DNA in ng	
+adapter	Illumina sequencing adapter	
+Ct_postLigation	qPCR Ct value after adapter ligation	
+volumePool	Volume used for pooling in μl	
+pool	Pool id	
+Ct_postConversion	qPCR Ct value after bisulfite conversion	
+enrichmentCycles	RRBS library PCR enrichment cycles	
+flowcell	Sequencing flowcell ID	
+lane	Sequencing lane	
+instrument_model	Sequencing instrument (Illumina HiSeq model)	
+read_length	Sequencing read length	
+read_type	Sequencing read type (paired or single)	
+library	Sequencing library type	
+Genome	Genome used for alignment	
+Raw_reads	Number of raw sequencing reads in bam file	
+Fastq_reads	Number of raw sequencing reads in fastq file	
+Trimmed_reads	Number of sequencing reads after trimming	
+Trim_loss_rate	Rate of reads lost during trimming	
+Aligned_reads	Number of aligned sequencing reads	
+Alignment_rate	Rate of reads aligned to the reference genome	
+Multimap_reads	Number of reads mapping to multiple positions in the genome	
+Unique_CpGs	Number of unique genomic covered CpGs	
+Total_CpGs	Number of measured CpGs	
+meanCoverage	Mean genome-wide read coverage	
+bisulfiteConversionRate	Bisulfite conversion rate based on non CpG cytosines	
+globalMethylationMean	Mean genome-wide DNA methylation	
+K1_unmethylated_count	Unmethylated spike-in control: Number of measurements 	
+K1_unmethylated_meth	Unmethylated spike-in control: DNA methylation	
+K3_methylated_count	Methylated spike-in control: Number of measurements 	
+K3_methylated_meth	Methylated spike-in control: DNA methylation	
+flowcell_date	Flowcell sequencing date	
+mspI	Number of reads starting with the MspI restriction site	
+taqI	Number of reads starting with the TaqI restriction site	
+rand_frag	Number of reads starting neither with the Mspi nor the TaqI restriction site (randomly fragmented reads)	
+rand_frag_perc	Percent of randomly fragmented reads	
+Image width [pix]	Histology segmentation	
+Image height [pix]	Histology segmentation	
+Block size N	Histology segmentation	
+Relative share hemorrhage	Histology segmentation	
+Relative share scar	Histology segmentation	
+Relative share necrosis	Histology segmentation	
+Relative share squeezed tissue	Histology segmentation	
+Relative share preexisting brain parenchyme	Histology segmentation	
+Relative share tumor	Histology segmentation	
+Relative share background	Histology segmentation	
+Area total [mm²]	Histology segmentation	
+Area hemorrhage [mm²]	Histology segmentation	
+Area scar [mm²]	Histology segmentation	
+Area necrosis [mm²]	Histology segmentation	
+Area squeezed tissue [mm²]	Histology segmentation	
+Area preexisting brain parenchyme [mm²]	Histology segmentation	
+Area tumor [mm²]	Histology segmentation	
+Area background [mm²]	Histology segmentation	
+Mean Nuclei # Necrosis	Histology segmentation	
+Mean Nuclei # Tumor	Histology segmentation	
+Mean Nuclei # Whole	Histology segmentation	
+Mean Nuclei # Scars	Histology segmentation	
+Mean Nuclei # Preexisting	Histology segmentation	
+Mean AVG Area Necrosis	Histology segmentation: refers to nuclei	
+Mean AVG Area Tumor	Histology segmentation: refers to nuclei	
+Mean AVG Area Whole	Histology segmentation: refers to nuclei	
+Mean AVG Area Scars	Histology segmentation: refers to nuclei	
+Mean AVG Area Preexisting	Histology segmentation: refers to nuclei	
+Mean STD Area Necrosis	Histology segmentation: refers to nuclei	
+Mean STD Area Tumor	Histology segmentation: refers to nuclei	
+Mean STD Area Whole	Histology segmentation: refers to nuclei	
+Mean STD Area Scars	Histology segmentation: refers to nuclei	
+Mean STD Area Preexisting	Histology segmentation: refers to nuclei	
+Mean COV Area Necrosis	Histology segmentation: refers to nuclei	
+Mean COV Area Tumor	Histology segmentation: refers to nuclei	
+Mean COV Area Whole	Histology segmentation: refers to nuclei	
+Mean COV Area Scars	Histology segmentation: refers to nuclei	
+Mean COV Area Preexisting	Histology segmentation: refers to nuclei	
+Mean AVG Eccentricity Necrosis	Histology segmentation: refers to nuclei	
+Mean AVG Eccentricity Tumor	Histology segmentation: refers to nuclei	
+Mean AVG Eccentricity Whole	Histology segmentation: refers to nuclei	
+Mean AVG Eccentricity Scars	Histology segmentation: refers to nuclei	
+Mean AVG Eccentricity Preexisting	Histology segmentation: refers to nuclei	
+Mean STD Eccentricity Necrosis	Histology segmentation: refers to nuclei	
+Mean STD Eccentricity Tumor	Histology segmentation: refers to nuclei	
+Mean STD Eccentricity Whole	Histology segmentation: refers to nuclei	
+Mean STD Eccentricity Scars	Histology segmentation: refers to nuclei	
+Mean STD Eccentricity Preexisting	Histology segmentation: refers to nuclei	
+Mean COV Eccentricity Necrosis	Histology segmentation: refers to nuclei	
+Mean COV Eccentricity Tumor	Histology segmentation: refers to nuclei	
+Mean COV Eccentricity Whole	Histology segmentation: refers to nuclei	
+Mean COV Eccentricity Scars	Histology segmentation: refers to nuclei	
+Mean COV Eccentricity Preexisting	Histology segmentation: refers to nuclei	
+Median Nuclei # Necrosis	Histology segmentation	
+Median Nuclei # Tumor	Histology segmentation	
+Median Nuclei # Whole	Histology segmentation	
+Median Nuclei # Scars	Histology segmentation	
+Median Nuclei # Preexisting	Histology segmentation	
+Median AVG Area Necrosis	Histology segmentation: refers to nuclei	
+Median AVG Area Tumor	Histology segmentation: refers to nuclei	
+Median AVG Area Whole	Histology segmentation: refers to nuclei	
+Median AVG Area Scars	Histology segmentation: refers to nuclei	
+Median AVG Area Preexisting	Histology segmentation: refers to nuclei	
+Median STD Area Necrosis	Histology segmentation: refers to nuclei	
+Median STD Area Tumor	Histology segmentation: refers to nuclei	
+Median STD Area Whole	Histology segmentation: refers to nuclei	
+Median STD Area Scars	Histology segmentation: refers to nuclei	
+Median STD Area Preexisting	Histology segmentation: refers to nuclei	
+Median COV Area Necrosis	Histology segmentation: refers to nuclei	
+Median COV Area Tumor	Histology segmentation: refers to nuclei	
+Median COV Area Whole	Histology segmentation: refers to nuclei	
+Median COV Area Scars	Histology segmentation: refers to nuclei	
+Median COV Area Preexisting	Histology segmentation: refers to nuclei	
+Median AVG Eccentricity Necrosis	Histology segmentation: refers to nuclei	
+Median AVG Eccentricity Tumor	Histology segmentation: refers to nuclei	
+Median AVG Eccentricity Whole	Histology segmentation: refers to nuclei	
+Median AVG Eccentricity Scars	Histology segmentation: refers to nuclei	
+Median AVG Eccentricity Preexisting	Histology segmentation: refers to nuclei	
+Median STD Eccentricity Necrosis	Histology segmentation: refers to nuclei	
+Median STD Eccentricity Tumor	Histology segmentation: refers to nuclei	
+Median STD Eccentricity Whole	Histology segmentation: refers to nuclei	
+Median STD Eccentricity Scars	Histology segmentation: refers to nuclei	
+Median STD Eccentricity Preexisting	Histology segmentation: refers to nuclei	
+Median COV Eccentricity Necrosis	Histology segmentation: refers to nuclei	
+Median COV Eccentricity Tumor	Histology segmentation: refers to nuclei	
+Median COV Eccentricity Whole	Histology segmentation: refers to nuclei	
+Median COV Eccentricity Scars	Histology segmentation: refers to nuclei	
+Median COV Eccentricity Preexisting	Histology segmentation: refers to nuclei	
+Mode Nuclei # Necrosis	Histology segmentation	
+Mode Nuclei # Tumor	Histology segmentation	
+Mode Nuclei # Whole	Histology segmentation	
+Mode Nuclei # Scars	Histology segmentation	
+Mode Nuclei # Preexisting	Histology segmentation	
+Mode AVG Area Necrosis	Histology segmentation: refers to nuclei	
+Mode AVG Area Tumor	Histology segmentation: refers to nuclei	
+Mode AVG Area Whole	Histology segmentation: refers to nuclei	
+Mode AVG Area Scars	Histology segmentation: refers to nuclei	
+Mode AVG Area Preexisting	Histology segmentation: refers to nuclei	
+Mode STD Area Necrosis	Histology segmentation: refers to nuclei	
+Mode STD Area Tumor	Histology segmentation: refers to nuclei	
+Mode STD Area Whole	Histology segmentation: refers to nuclei	
+Mode STD Area Scars	Histology segmentation: refers to nuclei	
+Mode STD Area Preexisting	Histology segmentation: refers to nuclei	
+CD163	Immunohistochemistry: relative abundance of positively staining cells	
+CD3	Immunohistochemistry: relative abundance of positively staining cells	
+CD34	Immunohistochemistry: relative abundance of positively staining area	
+CD45ro	Immunohistochemistry: relative abundance of positively staining cells	
+CD68	Immunohistochemistry: relative abundance of positively staining cells	
+CD8	Immunohistochemistry: relative abundance of positively staining cells	
+CD80	Immunohistochemistry: relative abundance of positively staining cells	
+Cell density	Immunohistochemistry: cell density	
+EZH2	Immunohistochemistry: relative abundance of positively staining cells	
+FOXP3	Immunohistochemistry: relative abundance of positively staining cells	
+Galectin	Immunohistochemistry: relative abundance of positively staining cells	
+HLA-DR	Immunohistochemistry: relative abundance of positively staining area	
+MIB	Immunohistochemistry: relative abundance of positively staining cells	
+PD1	Immunohistochemistry: relative abundance of positively staining cells	
+Tim3	Immunohistochemistry: relative abundance of positively staining cells	
+WHO2016_classification	Expert pathologist classification	
+WHO2016_classification_comment	Expert pathologist classification comment	
+Pseudopalisading necrosis	Expert pathologist annotation based on H&E microscopy	
+Radiation necrosis	Expert pathologist annotation based on H&E microscopy	
+Vascular fibrosis	Expert pathologist annotation based on H&E microscopy	
+Vascular proliferation	Expert pathologist annotation based on H&E microscopy	
+Calcification	Expert pathologist annotation based on H&E microscopy	
+Blood remnants	Expert pathologist annotation based on H&E microscopy	
+Center	Clinical center in which the patient was treated	
+Sex	Patient sex	
+DateOfBirth	Patient date of birth	
+IDH	IDH mutation status	
+Shape_shift	Expert pathologist classification	
+Shape_shift_type	Expert pathologist classification	
+TumorPhenotype	Derived from Shape_shift_type	
+NoOfSurgeries	Clinical annotation: number of tumor resective surgeries a patient has had	
+VitalStatus	Clinical annotation: vital status of a patient at the date of last follow-up	
+DateOfDeath_LastFollow-up	Clinical annotation	
+Follow-up_years	Clinical annotation	
+StuppComplete	Clinical annotation	
+StuppDiscontinued	Clinical annotation	
+ReasonForDiscontd	Clinical annotation	
+NoOfAdjuvantTMZCyclesCompleted	Clinical annotation	
+AlternativeTreatment	Clinical annotation	
+DendriticCellVaccination	Clinical annotation	
+Bevacizumab	Clinical annotation	
+ProgressionDate	Clinical annotation	
+FirstProgressionDate	Clinical annotation	
+SurgeryDate	Clinical annotation	
+Age	Clinical annotation: Age at tumor resection	
+CTXTreatment	Clinical annotation: Chemotherapy	
+RTXTreatment	Clinical annotation: Radiotherapy treatment type	
+RTXDose	Clinical annotation: Radiotherapy dose	
+treatment	Clinical annotation: Treatment prior to resection of the tumor sample	
+NoOfProgressions_pat	Clinical annotation: Number of progressions the patient has had in total	
+NoOfProgressions_tum	Clinical annotation: Number of progressions leading to the tumor sample	
+TreatmentDate	Clinical annotation: Treatment date prior to resection of the tumor sample	
+location	MRI expert annotation	
+position	MRI expert annotation	
+border	MRI expert annotation	
+contrast	MRI expert annotation	
+Numberoflesions	MRI expert annotation	
+Siteofsurgery	MRI expert annotation	
+Side	MRI expert annotation	
+Extentofresection	MRI expert annotation	
+progression_location	MRI expert annotation	
+Necrotic  (mm3)	MRI segmentation	
+Edema  (mm3)	MRI segmentation	
+Cystic (mm3)	MRI segmentation	
+Enhancing (mm3)	MRI segmentation	
+Total (mm3)	MRI segmentation	
+Proportion Necrotic (%)	MRI segmentation	
+VASARI F7	MRI segmentation	
+Proportion Edema (%)	MRI segmentation	
+VASARI F14	MRI segmentation	
+Proportion Cystic (%)	MRI segmentation	
+VASARI F5	MRI segmentation	
+Proportion Enhancing (%)	MRI segmentation	
+VASARI F6	MRI segmentation	
+classic T1	MRI progression type	
+cT1 flare up	MRI progression type	
+T2 diffus	MRI progression type	
+T2 circumscribed	MRI progression type	
+primary nonresponder	MRI progression type	
+qualTier	RRBS data quality tier	
+timeToFirstProg	Time span between first surgery and first tumor progression (days)	
+timeToSecSurg	Time span between first surgery and second surgery (days)	
+1_p_amplification	Total bases affected by indicated copy number aberration	
+1_p_deletion	Total bases affected by indicated copy number aberration	
+1_q_amplification	Total bases affected by indicated copy number aberration	
+1_q_deletion	Total bases affected by indicated copy number aberration	
+2_p_amplification	Total bases affected by indicated copy number aberration	
+2_p_deletion	Total bases affected by indicated copy number aberration	
+2_q_amplification	Total bases affected by indicated copy number aberration	
+2_q_deletion	Total bases affected by indicated copy number aberration	
+3_p_amplification	Total bases affected by indicated copy number aberration	
+3_p_deletion	Total bases affected by indicated copy number aberration	
+3_q_amplification	Total bases affected by indicated copy number aberration	
+3_q_deletion	Total bases affected by indicated copy number aberration	
+4_p_amplification	Total bases affected by indicated copy number aberration	
+4_p_deletion	Total bases affected by indicated copy number aberration	
+4_q_amplification	Total bases affected by indicated copy number aberration	
+4_q_deletion	Total bases affected by indicated copy number aberration	
+5_p_amplification	Total bases affected by indicated copy number aberration	
+5_p_deletion	Total bases affected by indicated copy number aberration	
+5_q_amplification	Total bases affected by indicated copy number aberration	
+5_q_deletion	Total bases affected by indicated copy number aberration	
+6_p_amplification	Total bases affected by indicated copy number aberration	
+6_p_deletion	Total bases affected by indicated copy number aberration	
+6_q_amplification	Total bases affected by indicated copy number aberration	
+6_q_deletion	Total bases affected by indicated copy number aberration	
+7_p_amplification	Total bases affected by indicated copy number aberration	
+7_p_deletion	Total bases affected by indicated copy number aberration	
+7_q_amplification	Total bases affected by indicated copy number aberration	
+7_q_deletion	Total bases affected by indicated copy number aberration	
+8_p_amplification	Total bases affected by indicated copy number aberration	
+8_p_deletion	Total bases affected by indicated copy number aberration	
+8_q_amplification	Total bases affected by indicated copy number aberration	
+8_q_deletion	Total bases affected by indicated copy number aberration	
+9_p_amplification	Total bases affected by indicated copy number aberration	
+9_p_deletion	Total bases affected by indicated copy number aberration	
+9_q_amplification	Total bases affected by indicated copy number aberration	
+9_q_deletion	Total bases affected by indicated copy number aberration	
+10_p_amplification	Total bases affected by indicated copy number aberration	
+10_p_deletion	Total bases affected by indicated copy number aberration	
+10_q_amplification	Total bases affected by indicated copy number aberration	
+10_q_deletion	Total bases affected by indicated copy number aberration	
+11_p_amplification	Total bases affected by indicated copy number aberration	
+11_p_deletion	Total bases affected by indicated copy number aberration	
+11_q_amplification	Total bases affected by indicated copy number aberration	
+11_q_deletion	Total bases affected by indicated copy number aberration	
+12_p_amplification	Total bases affected by indicated copy number aberration	
+12_p_deletion	Total bases affected by indicated copy number aberration	
+12_q_amplification	Total bases affected by indicated copy number aberration	
+12_q_deletion	Total bases affected by indicated copy number aberration	
+13_q_amplification	Total bases affected by indicated copy number aberration	
+13_q_deletion	Total bases affected by indicated copy number aberration	
+14_q_amplification	Total bases affected by indicated copy number aberration	
+14_q_deletion	Total bases affected by indicated copy number aberration	
+15_p_amplification	Total bases affected by indicated copy number aberration	
+15_p_deletion	Total bases affected by indicated copy number aberration	
+15_q_amplification	Total bases affected by indicated copy number aberration	
+15_q_deletion	Total bases affected by indicated copy number aberration	
+16_p_amplification	Total bases affected by indicated copy number aberration	
+16_p_deletion	Total bases affected by indicated copy number aberration	
+16_q_amplification	Total bases affected by indicated copy number aberration	
+16_q_deletion	Total bases affected by indicated copy number aberration	
+17_p_amplification	Total bases affected by indicated copy number aberration	
+17_p_deletion	Total bases affected by indicated copy number aberration	
+17_q_amplification	Total bases affected by indicated copy number aberration	
+17_q_deletion	Total bases affected by indicated copy number aberration	
+18_p_amplification	Total bases affected by indicated copy number aberration	
+18_p_deletion	Total bases affected by indicated copy number aberration	
+18_q_amplification	Total bases affected by indicated copy number aberration	
+18_q_deletion	Total bases affected by indicated copy number aberration	
+19_p_amplification	Total bases affected by indicated copy number aberration	
+19_p_deletion	Total bases affected by indicated copy number aberration	
+19_q_amplification	Total bases affected by indicated copy number aberration	
+19_q_deletion	Total bases affected by indicated copy number aberration	
+20_p_amplification	Total bases affected by indicated copy number aberration	
+20_p_deletion	Total bases affected by indicated copy number aberration	
+20_q_amplification	Total bases affected by indicated copy number aberration	
+20_q_deletion	Total bases affected by indicated copy number aberration	
+21_p_amplification	Total bases affected by indicated copy number aberration	
+21_p_deletion	Total bases affected by indicated copy number aberration	
+21_q_amplification	Total bases affected by indicated copy number aberration	
+21_q_deletion	Total bases affected by indicated copy number aberration	
+22_p_amplification	Total bases affected by indicated copy number aberration	
+22_p_deletion	Total bases affected by indicated copy number aberration	
+22_q_amplification	Total bases affected by indicated copy number aberration	
+22_q_deletion	Total bases affected by indicated copy number aberration	
+X_p_amplification	Total bases affected by indicated copy number aberration	
+X_p_deletion	Total bases affected by indicated copy number aberration	
+X_q_amplification	Total bases affected by indicated copy number aberration	
+X_q_deletion	Total bases affected by indicated copy number aberration	
+Y_p_amplification	Total bases affected by indicated copy number aberration	
+Y_p_deletion	Total bases affected by indicated copy number aberration	
+Y_q_amplification	Total bases affected by indicated copy number aberration	
+Y_q_deletion	Total bases affected by indicated copy number aberration	
+mean_entropy	Mean epi-allele entropy measured across promoter regions (EPY)	
+mean_pdr	Mean proportion of discordant reads measured across promoter regions (PDR)	
+mean_meth	Mean DNA methylation measured across promoter regions	
+transcSubtype	Dominant transcriptional subtype	
+Classical	Class probability for the clasical transcriptional subtype	
+Proneural	Class probability for the proneural transcriptional subtype	
+Mesenchymal	Class probability for the mesenchymal transcriptional subtype	
+transcSubtype_auc	Transcriptional subtype inference AUC	
+transcSubtype_auc_rand	Transcriptional subtype inference background AUC (shuffled labels)	
+transcSubtype_classProb	Class probability for the dominant transcriptional subtype	
+CTCF__Gliobla_None_62750	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+CTCF__H1-hESC_None_66533	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+CTCF__NH-A_None_38465	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+CHD1_(A301-218A)__H1-hESC_None_7245	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+NRSF__H1-hESC_None_13281	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+NRSF__U87_None_11741	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+NANOG__Embryonic Stem Cell_NA_18532	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+SOX2__Embryonic Stem Cell_NA_5204	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+Pol2__Gliobla_None_17405	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+Pol2__H1-hESC_None_20311	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+EZH2_(39875)__NH-A_None_6488	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+EZH2__Embryonic Stem Cell_NA_3204	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+POU5F1__Embryonic Stem Cell_NA_10374	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+POU5F1_(SC-9081)__H1-hESC_None_3996	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+RBBP5_(A300-109A)__H1-hESC_None_16143	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+POLR2A__Embryonic Stem Cell_NA_14498	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+KDM4A__Embryonic Stem Cell_NA_20621	MIRA score for the indicated factor and cell type (LOLAcore DB)	
+Active_TSS__H1_Cell_Line__E003_17209	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Active_TSS__NH-A_Astrocytes__E125_20684	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Bivalent_enhancers__H1_Cell_Line__E003_15759	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Bivalent_enhancers__NH-A_Astrocytes__E125_5604	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Bivalent_Poised_TSS__H1_Cell_Line__E003_9125	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Bivalent_Poised_TSS__NH-A_Astrocytes__E125_3212	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Enhancers__H1_Cell_Line__E003_98851	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Enhancers__NH-A_Astrocytes__E125_100086	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Heterochromatin__H1_Cell_Line__E003_35494	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Heterochromatin__NH-A_Astrocytes__E125_19974	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Quiescent__H1_Cell_Line__E003_82316	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Quiescent__NH-A_Astrocytes__E125_63717	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Repressed_polycomb__H1_Cell_Line__E003_17100	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+Repressed_polycomb__NH-A_Astrocytes__E125_19527	MIRA score for the indicated regulatory feature and cell type (Roadmap Epigenomics Projects)	
+mgmt_methyl	Mean MGMT promoter methylation at two relevant CpGs (cg12981137, cg12434587)
+mgmt_meth_max	Maximum MGMT promoter methylation at two relevant CpGs (cg12981137, cg12434587)
+mgmt_meth_min	Minimum MGMT promoter methylation at two relevant CpGs (cg12981137, cg12434587)
+mgmt_readCount	Total reads covering either CpG in the MGMT promoter	
+mgmt_CpGcount	Number of available relevant (cg12981137, cg12434587) CpGs in the MGMT promoter
+mgmt_conf1	MGMT promoter methylation status at different confidence levels (1=most confident, 4=least confident)
+mgmt_conf2	MGMT promoter methylation status at different confidence levels (1=most confident, 4=least confident)
+mgmt_conf3	MGMT promoter methylation status at different confidence levels (1=most confident, 4=least confident)
+mgmt_conf4	MGMT promoter methylation status at different confidence levels (1=most confident, 4=least confident)
+EPM_1vs2_20-40	Eloci per million assessed loci (read cutoff:20, entropy cutoff:40)
+EPM_1vs2_20-50	Eloci per million assessed loci (read cutoff:20, entropy cutoff:50)
+EPM_1vs2_20-60	Eloci per million assessed loci (read cutoff:20, entropy cutoff:60)
+EPM_1vs2_20-70	Eloci per million assessed loci (read cutoff:20, entropy cutoff:70)
+EPM_1vs2_20-80	Eloci per million assessed loci (read cutoff:20, entropy cutoff:80)
+EPM_1vs2_20-90	Eloci per million assessed loci (read cutoff:20, entropy cutoff:90)
+EPM_1vs2_40-40	Eloci per million assessed loci (read cutoff:40, entropy cutoff:40)
+EPM_1vs2_40-50	Eloci per million assessed loci (read cutoff:40, entropy cutoff:50)
+EPM_1vs2_40-60	Eloci per million assessed loci (read cutoff:40, entropy cutoff:60)
+EPM_1vs2_40-70	Eloci per million assessed loci (read cutoff:40, entropy cutoff:70)
+EPM_1vs2_40-80	Eloci per million assessed loci (read cutoff:40, entropy cutoff:80)
+EPM_1vs2_40-90	Eloci per million assessed loci (read cutoff:40, entropy cutoff:90)
+EPM_1vs2_60-40	Eloci per million assessed loci (read cutoff:60, entropy cutoff:40)
+EPM_1vs2_60-50	Eloci per million assessed loci (read cutoff:60, entropy cutoff:50)
+EPM_1vs2_60-60	Eloci per million assessed loci (read cutoff:60, entropy cutoff:60)
+EPM_1vs2_60-70	Eloci per million assessed loci (read cutoff:60, entropy cutoff:70)
+EPM_1vs2_60-80	Eloci per million assessed loci (read cutoff:60, entropy cutoff:80)
+EPM_1vs2_60-90	Eloci per million assessed loci (read cutoff:60, entropy cutoff:90)
+DPM	Number of differentially methylated promoters normalized to total number of assessed promoters	
+diff_trend_dist_norm	Differential methylation during progression: normalized manhatten distance to population trend	
+mean_diffmeth.Wnt signalling	Differential methylation during progression: mean DNA methylation difference at Wnt signaling promoter genes	
