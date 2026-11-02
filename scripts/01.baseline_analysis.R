@@ -1,6 +1,6 @@
 # read in metadata file 
 
-#counting relevant sample numbers 
+# counting relevant sample numbers and writing to file
 
 ## all classic recurrent GBMs and only use these from this point forward 
 
@@ -10,9 +10,11 @@
 
 ## number of patients with radionecrosis only, pseudopalisading only, neither, or both
 
-## check the correlation of continuous necrosis variables 
+## check the correlation of continuous necrosis variables and create relevant figures 
 
-## check the distribution of necrosis continuous variables for each of the classes defined above 
+## check the distribution of necrosis continuous variables for each of the classes defined above and create relevant figures 
+
+
 
 
 
