@@ -1,7 +1,7 @@
 # radnec_sig
+- limit to GB classic labeled samples 
 
 1) Radionecrosis as diagnosis versus recurrence with no radionecrosis annotated on recurrence sample
-- limit to GB classic labeled samples 
 
 2) Radionecrosis present vs pseudopalisading vs none in recurrence sample
 
