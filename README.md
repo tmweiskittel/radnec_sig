@@ -1,3 +1,29 @@
+# Work from the persistent attached disk
+cd /home/jupyter
+
+# Clone the repository
+git clone https://github.com/tmweiskittel/radnec_sig.git
+cd radnec_sig
+
+# Confirm repository
+git status
+pwd
+ls -lah
+
+# Create local data directory
+mkdir -p data/klughammer
+
+# Download Klughammer data from Google Cloud Storage
+gcloud storage cp \
+    --recursive \
+    gs://weiskittel-projects1/radnecrosis/klughammer_data/* \
+    data/klughammer/
+
+# Check downloaded files and disk usage
+du -sh data/klughammer
+find data/klughammer -maxdepth 2 -type f -printf '%p\t%k KB\n' | sort
+
+
 # radnec_sig
 - limit to GB classic labeled samples 
 
