@@ -1,4 +1,10 @@
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(purrr)
+library(stringr)
+library(tibble)
+library(ggplot2)
 
 # -------------------------------------------------------------------------
 # Setup
