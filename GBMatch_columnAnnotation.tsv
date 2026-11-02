@@ -10,7 +10,7 @@ tissue	Sample tissue
 material	Sample material	
 category	"Sample category (""GBMatch"": Progression cohort, ""Gbmatch_val"": Validation cohort, ""GLASS"" and  ""Gbmatch_valF"": Frozen sample controls, ”control"": White matter control, ""Gbmatch_add"": IDH mut control, ""Gbmatch_rcl"": RCL samples, ""multiselector"": Multiple samples from one tumor    )"	
 batch	Processing batch 	
-cohort	Progression: samples of the progression cohort + control samples, Validation: samples of the validation cohort + control samples
+cohort	Progression: samples of the progression cohort + control samples Validation: samples of the validation cohort + control samples
 plate position	RRBS library preparation plate position	
 inputDNA	RRBS library preparation input DNA in ng	
 adapter	Illumina sequencing adapter	
