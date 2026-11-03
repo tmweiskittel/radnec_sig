@@ -239,42 +239,28 @@ necrosis_long |>
 
     variable_name <- unique(dat$variable)
 
-    p <- ggplot(
-      dat,
-      aes(
-        x = value,
-        fill = necrosis_class
-      )
-    ) +
-      geom_histogram(
-        bins = 20,
-        position = "identity",
-        alpha = 0.4
-      ) +
-      labs(
-        x = variable_name,
-        y = "Number of samples",
-        fill = "Necrosis class"
-      ) +
-      theme_classic()
+p <- ggplot(
+  dat,
+  aes(
+    x = value,
+    fill = necrosis_class,
+    color = necrosis_class
+  )
+) +
+  geom_histogram(
+    bins = 20,
+    position = "identity",
+    alpha = 0.4,
+    linewidth = 0.5
+  ) +
+  labs(
+    x = variable_name,
+    y = "Number of samples",
+    fill = "Necrosis class",
+    color = "Necrosis class"
+  ) +
+  theme_classic()
 
-    file_name <- variable_name |>
-      str_replace_all("[^A-Za-z0-9]+", "_") |>
-      str_remove("_$") |>
-      str_to_lower()
-
-    ggsave(
-      paste0(
-        "results/baseline/",
-        file_name,
-        "_distribution_by_necrosis_class.png"
-      ),
-      p,
-      width = 6,
-      height = 4.5,
-      dpi = 300
-    )
-  })
 
 radnec_variables <- recurrent |>
   filter(
