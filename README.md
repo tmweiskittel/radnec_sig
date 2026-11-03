@@ -25,6 +25,8 @@ ls -lah
 
 ### Download the Klughammer data
 
+Data is in rrbsCg.RData which contains long-format CpG-level RRBS data. 
+
 Create a local directory for the methylation data:
 
 ```bash
