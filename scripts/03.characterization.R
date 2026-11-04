@@ -502,43 +502,38 @@ write_tsv(
 required_samples_1 <- expand.grid(
   comparison_1 = unique(comp1_meta$comparison_1),
   threshold = prevalence_thresholds
-) |>
-  as_tibble() |>
-  left_join(
-    comp1_meta |>
-      count(
-        comparison_1,
-        name = "group_n"
-      ),
-    by = "comparison_1"
-  ) |>
-  mutate(
-    min_samples = ceiling(
-      threshold * group_n
-    )
-  )
+)
+
+group_n_1 <- table(comp1_meta$comparison_1)
+
+required_samples_1$group_n <- as.integer(
+  group_n_1[required_samples_1$comparison_1]
+)
+
+required_samples_1$min_samples <- ceiling(
+  required_samples_1$threshold *
+    required_samples_1$group_n
+)
+
+cat("\nComparison 1 samples required:\n")
+print(required_samples_1)
+
 
 required_samples_2 <- expand.grid(
   comparison_2 = unique(comp2_meta$comparison_2),
   threshold = prevalence_thresholds
-) |>
-  as_tibble() |>
-  left_join(
-    comp2_meta |>
-      count(
-        comparison_2,
-        name = "group_n"
-      ),
-    by = "comparison_2"
-  ) |>
-  mutate(
-    min_samples = ceiling(
-      threshold * group_n
-    )
-  )
+)
 
-cat("\nComparison 1 samples required:\n")
-print(required_samples_1)
+group_n_2 <- table(comp2_meta$comparison_2)
+
+required_samples_2$group_n <- as.integer(
+  group_n_2[required_samples_2$comparison_2]
+)
+
+required_samples_2$min_samples <- ceiling(
+  required_samples_2$threshold *
+    required_samples_2$group_n
+)
 
 cat("\nComparison 2 samples required:\n")
 print(required_samples_2)
