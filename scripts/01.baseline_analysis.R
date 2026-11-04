@@ -36,6 +36,7 @@ included_diagnoses <- c(
 recurrent <- meta |>
   filter(
     surgery == 2,
+    category == "GBMatch",
     WHO2016_classification %in% included_diagnoses
   )
 
