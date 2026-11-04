@@ -12,7 +12,7 @@ dir.create(
 )
 
 # -------------------------------------------------------------------------
-# Read metadata
+# Read metadata and define first-recurrence cohort
 # -------------------------------------------------------------------------
 
 meta <- read_tsv(
@@ -27,10 +27,10 @@ included_diagnoses <- c(
   "Radiation necrosis"
 )
 
-# Restrict immediately to recurrent GBM-related specimens
-recurrent <- meta |>
+# Restrict all subsequent analyses to first-recurrence GBM-related specimens
+first_recurrence <- meta |>
   filter(
-    surgery > 1,
+    surgery == 2,
     WHO2016_classification %in% included_diagnoses
   ) |>
   mutate(
@@ -49,12 +49,32 @@ recurrent <- meta |>
     )
   )
 
+# Confirm cohort restriction
+stopifnot(
+  all(first_recurrence$surgery == 2)
+)
+
+cat(
+  "\nFirst-recurrence GBM-related cohort:\n",
+  "Samples: ", nrow(first_recurrence), "\n",
+  "Patients: ", n_distinct(first_recurrence$patID), "\n",
+  sep = ""
+)
+
+first_recurrence |>
+  count(
+    WHO2016_classification,
+    name = "n_samples"
+  ) |>
+  print()
+
 # -------------------------------------------------------------------------
 # Comparison 1:
-# Radiation necrosis diagnosis vs recurrent tumor without radiation necrosis
+# Radiation necrosis diagnosis vs first-recurrence tumor
+# without annotated radiation necrosis
 # -------------------------------------------------------------------------
 
-comparison_1 <- recurrent |>
+comparison_1 <- first_recurrence |>
   mutate(
     comparison_1 = case_when(
 
@@ -62,7 +82,7 @@ comparison_1 <- recurrent |>
       WHO2016_classification == "Radiation necrosis" ~
         "Radiation necrosis",
 
-      # Recurrent GBM-related tumor with explicitly absent RN annotation
+      # First-recurrence tumor with explicitly absent RN annotation
       WHO2016_classification != "Radiation necrosis" &
         radnec == FALSE ~
         "Recurrent tumor",
@@ -83,25 +103,34 @@ comparison_1 <- recurrent |>
     )
   )
 
-# QA
+# Confirm all comparison samples are from surgery 2
+stopifnot(
+  all(comparison_1$surgery == 2)
+)
+
+# Sample counts
 comparison_1_counts <- comparison_1 |>
   count(
     comparison_1,
     name = "n_samples"
   )
 
+cat("\nComparison 1:\n")
 print(comparison_1_counts)
 
-# Check number of unique patients
+# Patient counts
 comparison_1 |>
+  group_by(comparison_1) |>
   summarise(
     n_samples = n(),
     n_patients = n_distinct(patID),
-    .by = comparison_1
+    .groups = "drop"
   ) |>
   print()
 
-# Check the RN pathology flag among WHO-diagnosed RN samples
+# Check pathology annotations among WHO-diagnosed RN samples
+cat("\nRadiation necrosis diagnosis pathology annotations:\n")
+
 comparison_1 |>
   filter(
     comparison_1 == "Radiation necrosis"
@@ -115,25 +144,29 @@ comparison_1 |>
 # -------------------------------------------------------------------------
 # Comparison 2:
 # Radiation necrosis vs pseudopalisading necrosis vs neither
+# at first recurrence
 # -------------------------------------------------------------------------
 
-comparison_2 <- recurrent |>
+comparison_2 <- first_recurrence |>
   mutate(
     comparison_2 = case_when(
 
+      # Radiation necrosis without pseudopalisading necrosis
       radnec == TRUE &
         pseudopalisading == FALSE ~
         "Radiation necrosis",
 
+      # Pseudopalisading necrosis without radiation necrosis
       radnec == FALSE &
         pseudopalisading == TRUE ~
         "Pseudopalisading necrosis",
 
+      # Neither form of necrosis annotated
       radnec == FALSE &
         pseudopalisading == FALSE ~
         "Neither",
 
-      # Both-positive and missing samples are deliberately excluded
+      # Both-positive and missing annotations are excluded
       TRUE ~ NA_character_
     )
   ) |>
@@ -151,20 +184,28 @@ comparison_2 <- recurrent |>
     )
   )
 
-# QA
+# Confirm all comparison samples are from surgery 2
+stopifnot(
+  all(comparison_2$surgery == 2)
+)
+
+# Sample counts
 comparison_2_counts <- comparison_2 |>
   count(
     comparison_2,
     name = "n_samples"
   )
 
+cat("\nComparison 2:\n")
 print(comparison_2_counts)
 
+# Patient counts
 comparison_2 |>
+  group_by(comparison_2) |>
   summarise(
     n_samples = n(),
     n_patients = n_distinct(patID),
-    .by = comparison_2
+    .groups = "drop"
   ) |>
   print()
 
@@ -175,14 +216,14 @@ comparison_2 |>
 comparison_counts <- bind_rows(
   comparison_1_counts |>
     transmute(
-      comparison = "Radiation necrosis diagnosis vs recurrent tumor",
+      comparison = "Radiation necrosis diagnosis vs first-recurrence tumor",
       group = as.character(comparison_1),
       n_samples
     ),
 
   comparison_2_counts |>
     transmute(
-      comparison = "Necrosis type",
+      comparison = "Necrosis type at first recurrence",
       group = as.character(comparison_2),
       n_samples
     )
@@ -220,3 +261,5 @@ write_tsv(
     ),
   "results/comparisons/necrosis_type.tsv"
 )
+
+cat("\nComparison metadata complete.\n")
