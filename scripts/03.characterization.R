@@ -400,4 +400,145 @@ write_tsv(
   "results/methylation_qc/comparison_2_cpg_prevalence.tsv"
 )
 
+# -------------------------------------------------------------------------
+# Joint CpG prevalence across groups
+# -------------------------------------------------------------------------
+
+prevalence_thresholds <- c(
+  0.25,
+  0.50,
+  0.75,
+  0.90
+)
+
+# -------------------------------------------------------------------------
+# Comparison 1
+# -------------------------------------------------------------------------
+
+joint_prevalence_1 <- lapply(
+  prevalence_thresholds,
+  function(threshold) {
+
+    # CpGs meeting the threshold within each group
+    eligible <- cpg_coverage_1[
+      proportion >= threshold,
+      .(
+        n_groups = uniqueN(comparison_1)
+      ),
+      by = .(
+        chr,
+        start
+      )
+    ]
+
+    # Retain CpGs meeting the threshold in every group
+    eligible[
+      n_groups == uniqueN(comp1_meta$comparison_1),
+      .(
+        threshold = threshold,
+        n_cpg = .N
+      )
+    ]
+  }
+) |>
+  rbindlist()
+
+cat("\nComparison 1 joint CpG prevalence:\n")
+print(joint_prevalence_1)
+
+# -------------------------------------------------------------------------
+# Comparison 2
+# -------------------------------------------------------------------------
+
+joint_prevalence_2 <- lapply(
+  prevalence_thresholds,
+  function(threshold) {
+
+    # CpGs meeting the threshold within each group
+    eligible <- cpg_coverage_2[
+      proportion >= threshold,
+      .(
+        n_groups = uniqueN(comparison_2)
+      ),
+      by = .(
+        chr,
+        start
+      )
+    ]
+
+    # Retain CpGs meeting the threshold in every group
+    eligible[
+      n_groups == uniqueN(comp2_meta$comparison_2),
+      .(
+        threshold = threshold,
+        n_cpg = .N
+      )
+    ]
+  }
+) |>
+  rbindlist()
+
+cat("\nComparison 2 joint CpG prevalence:\n")
+print(joint_prevalence_2)
+
+# -------------------------------------------------------------------------
+# Save joint prevalence summaries
+# -------------------------------------------------------------------------
+
+write_tsv(
+  as_tibble(joint_prevalence_1),
+  "results/methylation_qc/comparison_1_joint_cpg_prevalence.tsv"
+)
+
+write_tsv(
+  as_tibble(joint_prevalence_2),
+  "results/methylation_qc/comparison_2_joint_cpg_prevalence.tsv"
+)
+
+# -------------------------------------------------------------------------
+# Samples required at each prevalence threshold
+# -------------------------------------------------------------------------
+
+required_samples_1 <- expand_grid(
+  comparison_1 = unique(comp1_meta$comparison_1),
+  threshold = prevalence_thresholds
+) |>
+  left_join(
+    comp1_meta |>
+      count(
+        comparison_1,
+        name = "group_n"
+      ),
+    by = "comparison_1"
+  ) |>
+  mutate(
+    min_samples = ceiling(
+      threshold * group_n
+    )
+  )
+
+required_samples_2 <- expand_grid(
+  comparison_2 = unique(comp2_meta$comparison_2),
+  threshold = prevalence_thresholds
+) |>
+  left_join(
+    comp2_meta |>
+      count(
+        comparison_2,
+        name = "group_n"
+      ),
+    by = "comparison_2"
+  ) |>
+  mutate(
+    min_samples = ceiling(
+      threshold * group_n
+    )
+  )
+
+cat("\nComparison 1 samples required:\n")
+print(required_samples_1)
+
+cat("\nComparison 2 samples required:\n")
+print(required_samples_2)
+
 cat("\nMethylation QC complete.\n")
