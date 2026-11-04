@@ -192,7 +192,7 @@ sample_coverage_1 |>
     comparison_1 == "Radiation necrosis"
   ) |>
   arrange(n_cpg) |>
-  print(n = Inf)
+  print()
 
 # -------------------------------------------------------------------------
 # Sample coverage for comparison 2
