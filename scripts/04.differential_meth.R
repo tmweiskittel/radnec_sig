@@ -421,23 +421,32 @@ run_dss_comparison <- function(
   result <- as.data.table(fit)
 
   # DSS diff is group1 - group2
-  result[
-    ,
-    comparison := paste(
-      group_1,
-      "vs",
-      group_2
-    )
-  ]
+ result <- as.data.table(fit)
 
-  result[
-    ,
-    fdr := p.adjust(
-      pvals,
-      method = "BH"
-    )
-  ]
+# Confirm expected DSS output
+cat("\nDSS result columns:\n")
+print(names(result))
 
+stopifnot(
+  all(c(
+    "chr",
+    "pos",
+    "mu1",
+    "mu2",
+    "diff",
+    "pval",
+    "fdr"
+  ) %in% names(result))
+)
+
+result[
+  ,
+  comparison := paste(
+    group_1,
+    "vs",
+    group_2
+  )
+]
   setorder(
     result,
     fdr,
