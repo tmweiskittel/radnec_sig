@@ -411,19 +411,15 @@ run_dss_comparison <- function(
     2
   )
 
-  fit <- DMLtest(
-    bs_data$bs,
-    group1 = which(dss_group == 1),
-    group2 = which(dss_group == 2),
-    smoothing = FALSE
-  )
+fit <- DMLtest(
+  bs_data$bs,
+  group1 = which(dss_group == 1),
+  group2 = which(dss_group == 2),
+  smoothing = FALSE
+)
 
-  result <- as.data.table(fit)
+result <- as.data.table(fit)
 
-  # DSS diff is group1 - group2
- result <- as.data.table(fit)
-
-# Confirm expected DSS output
 cat("\nDSS result columns:\n")
 print(names(result))
 
@@ -447,29 +443,41 @@ result[
     group_2
   )
 ]
-  setorder(
-    result,
-    fdr,
-    -abs(diff)
-  )
 
-  write_tsv(
-    as_tibble(result),
-    output_file
-  )
+result[
+  ,
+  abs_diff := abs(diff)
+]
 
-  cat(
-    "CpGs tested: ",
-    format(nrow(result), big.mark = ","),
-    "\n",
-    "FDR < 0.05: ",
-    sum(result$fdr < 0.05, na.rm = TRUE),
-    "\n",
-    sep = ""
-  )
+setorder(
+  result,
+  fdr,
+  -abs_diff
+)
 
-  result
-}
+write_tsv(
+  as_tibble(result),
+  output_file
+)
+
+cat(
+  "CpGs tested: ",
+  format(nrow(result), big.mark = ","),
+  "\n",
+  "FDR < 0.05: ",
+  sum(result$fdr < 0.05, na.rm = TRUE),
+  "\n",
+  "FDR < 0.05 and absolute methylation difference >= 0.10: ",
+  sum(
+    result$fdr < 0.05 &
+      result$abs_diff >= 0.10,
+    na.rm = TRUE
+  ),
+  "\n",
+  sep = ""
+)
+
+result
 
 # =========================================================================
 # Comparison 1
@@ -610,40 +618,63 @@ summary_results <- tibble(
     "RN vs pseudopalisading",
     "Pseudopalisading vs neither"
   ),
+
   n_cpg_tested = c(
     nrow(dm_1),
     nrow(dm_radnec_vs_neither),
     nrow(dm_radnec_vs_pseudo),
     nrow(dm_pseudo_vs_neither)
   ),
+
   fdr_05 = c(
-    sum(dm_1$fdr < 0.05, na.rm = TRUE),
-    sum(dm_radnec_vs_neither$fdr < 0.05, na.rm = TRUE),
-    sum(dm_radnec_vs_pseudo$fdr < 0.05, na.rm = TRUE),
-    sum(dm_pseudo_vs_neither$fdr < 0.05, na.rm = TRUE)
+    sum(
+      dm_1$fdr < 0.05,
+      na.rm = TRUE
+    ),
+    sum(
+      dm_radnec_vs_neither$fdr < 0.05,
+      na.rm = TRUE
+    ),
+    sum(
+      dm_radnec_vs_pseudo$fdr < 0.05,
+      na.rm = TRUE
+    ),
+    sum(
+      dm_pseudo_vs_neither$fdr < 0.05,
+      na.rm = TRUE
+    )
   ),
+
   fdr_05_delta_10 = c(
     sum(
       dm_1$fdr < 0.05 &
-        abs(dm_1$diff) >= 0.10,
+        dm_1$abs_diff >= 0.10,
       na.rm = TRUE
     ),
     sum(
       dm_radnec_vs_neither$fdr < 0.05 &
-        abs(dm_radnec_vs_neither$diff) >= 0.10,
+        dm_radnec_vs_neither$abs_diff >= 0.10,
       na.rm = TRUE
     ),
     sum(
       dm_radnec_vs_pseudo$fdr < 0.05 &
-        abs(dm_radnec_vs_pseudo$diff) >= 0.10,
+        dm_radnec_vs_pseudo$abs_diff >= 0.10,
       na.rm = TRUE
     ),
     sum(
       dm_pseudo_vs_neither$fdr < 0.05 &
-        abs(dm_pseudo_vs_neither$diff) >= 0.10,
+        dm_pseudo_vs_neither$abs_diff >= 0.10,
       na.rm = TRUE
     )
   )
+)
+
+cat("\nDifferential methylation summary:\n")
+print(summary_results)
+
+write_tsv(
+  summary_results,
+  "results/differential_methylation/summary.tsv"
 )
 
 cat("\nDifferential methylation summary:\n")
