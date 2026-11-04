@@ -31,6 +31,7 @@ included_diagnoses <- c(
 first_recurrence <- meta |>
   filter(
     surgery == 2,
+    category == "GBMatch",
     WHO2016_classification %in% included_diagnoses
   ) |>
   mutate(
