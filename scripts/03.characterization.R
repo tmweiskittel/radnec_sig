@@ -499,10 +499,11 @@ write_tsv(
 # Samples required at each prevalence threshold
 # -------------------------------------------------------------------------
 
-required_samples_1 <- expand_grid(
+required_samples_1 <- expand.grid(
   comparison_1 = unique(comp1_meta$comparison_1),
   threshold = prevalence_thresholds
 ) |>
+  as_tibble() |>
   left_join(
     comp1_meta |>
       count(
@@ -517,10 +518,11 @@ required_samples_1 <- expand_grid(
     )
   )
 
-required_samples_2 <- expand_grid(
+required_samples_2 <- expand.grid(
   comparison_2 = unique(comp2_meta$comparison_2),
   threshold = prevalence_thresholds
 ) |>
+  as_tibble() |>
   left_join(
     comp2_meta |>
       count(
@@ -540,5 +542,3 @@ print(required_samples_1)
 
 cat("\nComparison 2 samples required:\n")
 print(required_samples_2)
-
-cat("\nMethylation QC complete.\n")
