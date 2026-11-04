@@ -35,7 +35,7 @@ included_diagnoses <- c(
 # Restrict all subsequent analyses to recurrent GBM-related samples
 recurrent <- meta |>
   filter(
-    surgery > 1,
+    surgery == 2,
     WHO2016_classification %in% included_diagnoses
   )
 
@@ -81,7 +81,7 @@ recurrent <- recurrent |>
 sample_counts <- bind_rows(
   tibble(
     category = "Total",
-    group = "All recurrent GBM-related samples",
+    group = "First-recurrence GBM-related samples",
     n = nrow(recurrent)
   ),
   recurrent |>
