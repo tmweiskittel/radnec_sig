@@ -185,14 +185,12 @@ sample_coverage_1 |>
   arrange(n_cpg) |>
   print(n = 20)
 
-cat("\nRadiation necrosis diagnosis samples:\n")
+radnec_sample_coverage <- sample_coverage_1 |>
+  filter(comparison_1 == "Radiation necrosis") |>
+  arrange(n_cpg)
 
-sample_coverage_1 |>
-  filter(
-    comparison_1 == "Radiation necrosis"
-  ) |>
-  arrange(n_cpg) |>
-  print()
+cat("\nRadiation necrosis diagnosis samples:\n")
+print(radnec_sample_coverage)
 
 # -------------------------------------------------------------------------
 # Sample coverage for comparison 2
