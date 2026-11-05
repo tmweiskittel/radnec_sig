@@ -478,7 +478,7 @@ cat(
 )
 
 result
-
+}
 # =========================================================================
 # Comparison 1
 # Radiation necrosis diagnosis vs recurrent tumor
@@ -677,12 +677,6 @@ write_tsv(
   "results/differential_methylation/summary.tsv"
 )
 
-cat("\nDifferential methylation summary:\n")
-print(summary_results)
 
-write_tsv(
-  summary_results,
-  "results/differential_methylation/summary.tsv"
-)
 
 cat("\nDifferential methylation analysis complete.\n")
