@@ -260,6 +260,12 @@ comparison_3 |>
   ) |>
   print()
 
+comparison_3_counts <- comparison_3 |>
+  count(
+    comparison_3,
+    name = "n_samples"
+  )
+
 write_tsv(
   comparison_3 |>
     select(
@@ -291,6 +297,13 @@ comparison_counts <- bind_rows(
     transmute(
       comparison = "Necrosis type at first recurrence",
       group = as.character(comparison_2),
+      n_samples
+    ),
+
+  comparison_3_counts |>
+    transmute(
+      comparison = "Necrosis type with >=5% necrotic tissue",
+      group = as.character(comparison_3),
       n_samples
     )
 )
