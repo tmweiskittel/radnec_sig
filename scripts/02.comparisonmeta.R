@@ -211,6 +211,71 @@ comparison_2 |>
   print()
 
 # -------------------------------------------------------------------------
+# Comparison 3:
+# Necrosis type among samples with substantial necrotic tissue
+# -------------------------------------------------------------------------
+
+necrosis_threshold <- 0.05
+
+comparison_3 <- first_recurrence |>
+  mutate(
+    comparison_3 = case_when(
+
+      radnec == TRUE &
+        pseudopalisading == FALSE &
+        `Relative share necrosis` >= necrosis_threshold ~
+        "Radiation necrosis",
+
+      radnec == FALSE &
+        pseudopalisading == TRUE &
+        `Relative share necrosis` >= necrosis_threshold ~
+        "Pseudopalisading necrosis",
+
+      TRUE ~ NA_character_
+    )
+  ) |>
+  filter(
+    !is.na(comparison_3)
+  ) |>
+  mutate(
+    comparison_3 = factor(
+      comparison_3,
+      levels = c(
+        "Pseudopalisading necrosis",
+        "Radiation necrosis"
+      )
+    )
+  )
+
+cat("\nComparison 3: >=5% necrotic tissue\n")
+
+comparison_3 |>
+  group_by(comparison_3) |>
+  summarise(
+    n_samples = n(),
+    median_necrosis = median(`Relative share necrosis`),
+    min_necrosis = min(`Relative share necrosis`),
+    max_necrosis = max(`Relative share necrosis`),
+    .groups = "drop"
+  ) |>
+  print()
+
+write_tsv(
+  comparison_3 |>
+    select(
+      patID,
+      surgery,
+      id,
+      WHO2016_classification,
+      `Radiation necrosis`,
+      `Pseudopalisading necrosis`,
+      `Relative share necrosis`,
+      comparison_3
+    ),
+  "results/comparisons/high_necrosis_radnec_vs_pseudopalisading.tsv"
+)
+
+# -------------------------------------------------------------------------
 # Save comparison definitions
 # -------------------------------------------------------------------------
 
