@@ -328,30 +328,4 @@ write_tsv(
   "results/comparisons/necrosis_type.tsv"
 )
 
-# -------------------------------------------------------------------------
-# Necrotic tissue content in necrosis-positive samples
-# -------------------------------------------------------------------------
-summary(first_recurrence$`Relative share necrosis`)
-
-first_recurrence |>
-  filter(
-    radnec == TRUE |
-      pseudopalisading == TRUE
-  ) |>
-  select(
-    id,
-    `Radiation necrosis`,
-    `Pseudopalisading necrosis`,
-    `Relative share necrosis`
-  ) |>
-  arrange(
-    desc(`Relative share necrosis`)
-  ) |>
-  print(n = Inf)
-
-write_tsv(
-  necrosis_tissue_counts,
-  "results/comparisons/necrosis_tissue_threshold_counts.tsv"
-)
-
 cat("\nComparison metadata complete.\n")
