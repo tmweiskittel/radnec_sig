@@ -618,12 +618,13 @@ stopifnot(
 
 cat("\nComparison 3 sample counts:\n")
 
-comparison_3_counts= comparison_3 |>
-  count(
+comparison_3_counts <- comparison_3 |>
+  dplyr::count(
     comparison_3,
     name = "n_samples"
-  ) |>
-  print()
+  )
+
+print(comparison_3_counts)
 
 # -------------------------------------------------------------------------
 # 50% prevalence filtering
