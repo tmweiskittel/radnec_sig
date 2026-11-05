@@ -618,7 +618,7 @@ stopifnot(
 
 cat("\nComparison 3 sample counts:\n")
 
-comparison_3 |>
+comparison_3_counts |>
   count(
     comparison_3,
     name = "n_samples"
