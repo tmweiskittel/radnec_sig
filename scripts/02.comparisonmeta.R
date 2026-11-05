@@ -263,4 +263,62 @@ write_tsv(
   "results/comparisons/necrosis_type.tsv"
 )
 
+# -------------------------------------------------------------------------
+# Necrotic tissue content in necrosis-positive samples
+# -------------------------------------------------------------------------
+
+necrosis_tissue_counts <- first_recurrence |>
+  filter(
+    radnec == TRUE |
+      pseudopalisading == TRUE
+  ) |>
+  mutate(
+    necrosis_type = case_when(
+      radnec == TRUE &
+        pseudopalisading == FALSE ~
+        "Radiation necrosis",
+
+      radnec == FALSE &
+        pseudopalisading == TRUE ~
+        "Pseudopalisading necrosis",
+
+      radnec == TRUE &
+        pseudopalisading == TRUE ~
+        "Both",
+
+      TRUE ~ NA_character_
+    )
+  ) |>
+  group_by(necrosis_type) |>
+  summarise(
+    n_total = n(),
+    n_necrosis_measure = sum(
+      !is.na(`Relative share necrosis`)
+    ),
+    n_ge_25 = sum(
+      `Relative share necrosis` >= 0.25,
+      na.rm = TRUE
+    ),
+    n_ge_50 = sum(
+      `Relative share necrosis` >= 0.50,
+      na.rm = TRUE
+    ),
+    n_ge_75 = sum(
+      `Relative share necrosis` >= 0.75,
+      na.rm = TRUE
+    ),
+    median_necrosis = median(
+      `Relative share necrosis`,
+      na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
+
+print(necrosis_tissue_counts)
+
+write_tsv(
+  necrosis_tissue_counts,
+  "results/comparisons/necrosis_tissue_threshold_counts.tsv"
+)
+
 cat("\nComparison metadata complete.\n")
