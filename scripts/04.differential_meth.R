@@ -56,9 +56,15 @@ stopifnot(
   ) %in% names(ret))
 )
 
+comparison_3 <- read_tsv(
+  "results/comparisons/high_necrosis_radnec_vs_pseudopalisading.tsv",
+  show_col_types = FALSE
+)
+
 comparison_ids <- unique(c(
   comparison_1$id,
-  comparison_2$id
+  comparison_2$id,
+  comparison_3$id
 ))
 
 rrbs <- ret[
@@ -591,6 +597,125 @@ dm_pseudo_vs_neither <- run_dss_comparison(
   eligible_cpgs = eligible_cpg_2,
   output_file =
     "results/differential_methylation/pseudopalisading_vs_neither.tsv"
+)
+
+# =========================================================================
+# Comparison 3
+# Radiation necrosis vs pseudopalisading necrosis among samples with
+# >=5% histologically segmented necrotic tissue
+# =========================================================================
+
+comparison_3 <- read_tsv(
+  "results/comparisons/high_necrosis_radnec_vs_pseudopalisading.tsv",
+  show_col_types = FALSE
+)
+
+stopifnot(
+  all(comparison_3$surgery == 2),
+  !anyDuplicated(comparison_3$id),
+  all(comparison_3$`Relative share necrosis` >= 0.05)
+)
+
+cat("\nComparison 3 sample counts:\n")
+
+comparison_3 |>
+  count(
+    comparison_3,
+    name = "n_samples"
+  ) |>
+  print()
+
+# -------------------------------------------------------------------------
+# 50% prevalence filtering
+# -------------------------------------------------------------------------
+
+cat("\nComparison 3 prevalence filtering\n")
+
+prevalence_3 <- get_eligible_cpgs(
+  rrbs_data = rrbs,
+  metadata = comparison_3,
+  group_col = "comparison_3",
+  threshold = prevalence_threshold
+)
+
+eligible_cpg_3 <- prevalence_3$eligible
+
+cat(
+  "CpGs passing >=50% prevalence in both groups: ",
+  format(nrow(eligible_cpg_3), big.mark = ","),
+  "\n",
+  sep = ""
+)
+
+stopifnot(
+  nrow(eligible_cpg_3) > 0
+)
+
+# -------------------------------------------------------------------------
+# DSS:
+# Radiation necrosis vs pseudopalisading necrosis
+# -------------------------------------------------------------------------
+
+dm_high_necrosis <- run_dss_comparison(
+  rrbs_data = rrbs,
+  metadata = comparison_3,
+  group_col = "comparison_3",
+  group_1 = "Radiation necrosis",
+  group_2 = "Pseudopalisading necrosis",
+  eligible_cpgs = eligible_cpg_3,
+  output_file =
+    "results/differential_methylation/high_necrosis_radnec_vs_pseudopalisading.tsv"
+)
+
+# -------------------------------------------------------------------------
+# Save eligible CpGs
+# -------------------------------------------------------------------------
+
+write_tsv(
+  as_tibble(eligible_cpg_3),
+  "results/differential_methylation/comparison_3_eligible_cpgs.tsv"
+)
+
+# -------------------------------------------------------------------------
+# Summary
+# -------------------------------------------------------------------------
+
+comparison_3_summary <- tibble(
+  comparison =
+    "RN vs pseudopalisading, >=5% necrotic tissue",
+
+  n_radnec =
+    sum(comparison_3$comparison_3 == "Radiation necrosis"),
+
+  n_pseudopalisading =
+    sum(
+      comparison_3$comparison_3 ==
+        "Pseudopalisading necrosis"
+    ),
+
+  n_cpg_tested =
+    nrow(dm_high_necrosis),
+
+  fdr_05 =
+    sum(
+      dm_high_necrosis$fdr < 0.05,
+      na.rm = TRUE
+    ),
+
+  fdr_05_delta_10 =
+    sum(
+      dm_high_necrosis$fdr < 0.05 &
+        dm_high_necrosis$abs_diff >= 0.10,
+      na.rm = TRUE
+    )
+)
+
+cat("\nComparison 3 differential methylation summary:\n")
+print(comparison_3_summary)
+
+write_tsv(
+  comparison_3_summary,
+  "results/differential_methylation/high_necrosis_summary.tsv"
 )
 
 # -------------------------------------------------------------------------
